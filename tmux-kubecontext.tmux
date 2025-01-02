@@ -33,7 +33,7 @@ get_kubectl_binary() {
 symbol_enabled(){
   local enabled=$(get_tmux_option "@tmux_kubecontext_symbol_enable")
   [[ $enabled == true ]]
-} 
+}
 
 get_symbol() {
   get_tmux_option "@tmux_kubecontext_symbol"
@@ -58,7 +58,7 @@ get_separator_fg_color(){
 namespace_enabled(){
   local enabled=$(get_tmux_option "@tmux_kubecontext_namespace_enable")
   [[ $enabled == true ]]
-} 
+}
 
 get_namespace_fg_color(){
   get_tmux_option "@tmux_kubecontext_namespace_fg_color"
@@ -67,7 +67,7 @@ get_namespace_fg_color(){
 error_enabled(){
   local enabled=$(get_tmux_option "@tmux_kubecontext_error_enable")
   [[ $enabled == true ]]
-} 
+}
 
 get_error_prefix(){
   get_tmux_option "@tmux_kubecontext_error_prefix"
@@ -254,7 +254,8 @@ update_context(){
     set_status_error "failed to get context with kubectl"
     return
   fi
-  set_status_context $context
+  context="${context/*\//}"
+  set_status_context "$context"
 
   # Update namespace
   local namespace
